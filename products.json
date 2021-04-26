@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Producto 1",
+        "description": "producto de blah blah blah",
+        "category": "dogs",
+        "price": 2.00,
+        "stock": 12,
+        "image": "assets/img/dogs",
+        "offer": false
+    },
+    {
+        "name": "Producto 1",
+        "description": "producto de blah blah blah",
+        "category": "dogs",
+        "price": 2.00,
+        "stock": 12,
+        "image": "assets/img/dogs",
+        "offer": false
+    }    
+]

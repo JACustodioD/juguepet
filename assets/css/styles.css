@@ -1,0 +1,72 @@
+/**
+* color 1: #202426 #E0DFF2 #014040
+* color 2: #6C733D #C1C4D9 #02735E
+* color 3: #9DA65D #88ABF2 #03A678
+* color 4: #8C8C88 #080C0D #F28C0F
+* color 5: #F2F2F2 #1B2526 #591202
+*/
+
+body{
+    background-image: url("../img/header.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
+
+header {
+    background-color: #03A678;
+    background-image: url("../img/header.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 40rem;
+    color: #591202;
+   /* border-bottom: 1px solid #02735E; 
+
+*/
+}
+
+
+.store-nav {
+    background-color: transparent;
+    color: #014040;
+}
+.store-nav a {
+    color: #014040;
+}
+.store-menu-icon{
+    color: #010040;
+}
+
+.btn-store {
+	color: white;
+	background-color: #03A678;
+	border-color: #02735E;
+}
+
+footer{
+    background-color: #03A678;
+    
+}
+footer a {
+    text-decoration: none;
+    color: #F28C0F;
+}
+
+
+@media (max-width:499px){
+    header{
+        background-image: url("../img/headerMobile.png");
+        height: 45rem;
+    }
+    body{
+        background-image: url("../img/headerMobile.png");
+
+    }
+    .store-nav {
+        background-color: #03A678;
+    }    
+}
