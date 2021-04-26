@@ -47,14 +47,23 @@ header {
 	border-color: #02735E;
 }
 
+.card{
+    border: 3px solid #014040;
+    border-radius: 3%;
+}
+
 footer{
-    background-color: #03A678;
+    background:transparent;
     
 }
 footer a {
     text-decoration: none;
+    color: #014040;
+}
+footer a:hover{
     color: #F28C0F;
 }
+
 
 
 @media (max-width:499px){
@@ -68,5 +77,8 @@ footer a {
     }
     .store-nav {
         background-color: #03A678;
-    }    
+    }
+    footer {
+        background: linear-gradient(transparent, #03A678);
+    }
 }
