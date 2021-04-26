@@ -19,6 +19,10 @@
     <body>
         <div id="app">
 
+            <!-- header -->
+            <header></header>
+            <!-- end header -->
+
             <!-- nav -->
             <nav class="navbar navbar-expand-lg store-nav sticky-top">
                   <div class="container-fluid">
@@ -30,16 +34,19 @@
                         <span class=" d-flex me-auto "></span>
                           <ul class="navbar-nav  mb-2 mb-lg-0 ">
                             <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="#">Home</a>
+                              <a class="nav-link active" aria-current="page" href="#offers">Inicio</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">Features</a>
+                              <a class="nav-link" href="#search">Productos</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="#">Pricing</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Carrito</a>
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                  Carrito
+                                  <span class="badge bg-success">{{ cart.length}}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -81,16 +88,19 @@
             <!-- end offers -->
             
             <!-- search -->
-            <div class="container">
-                <div class="row">
-                  <div class="col-12 col-md-4 offset-md-8 my-4">
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                  </div>
+            <section id="search">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-12 col-md-4 offset-md-8 my-4">
+                        <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                          <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                      </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+            
             <!-- end search -->
             
             <!-- products -->
@@ -98,7 +108,7 @@
             <section id="products">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-3 g-4" >
-                        <product v-for="product in products" :key="product.name" :product="product"></product>
+                        <product v-for="product in products" :key="product.name" :product="product" @sendtocart="addToCart($event)"></product>
                     </div>
                 </div>
             </section>
@@ -127,15 +137,27 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    ...
+                      <div class="row" v-for="product, index in cart" :key="product.name" :class="{'bg-green': index & 1}"> 
+                            <div class="col-4 my-2">
+                                <img :src="product.image" class="img-thumbnail" :alt="product.name">
+                            </div>
+                            <div class="col-7 my-2">
+                              <p>Nombre: {{product.name}}</p>
+                              <p>Cantidad: {{product.quantity}}</p>
+                              <p>Precio  ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
+                            </div>
+                      </div>
+                      <div class="row">
+                          <p class="text-end">Total $ {{total}} </p>
+                      </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-success">Comprar</button>
                   </div>
                 </div>
               </div>
@@ -152,7 +174,7 @@
         <!-- VueJS version 3 -->
         <script src="https://unpkg.com/vue@next"></script>
         <script>
-            const { createApp, ref } = Vue;
+            const { createApp, ref, computed } = Vue;
             const app = createApp({
                 setup(){
                     const storeName = ref("JuguePet");
@@ -164,7 +186,8 @@
                             "price": 35,
                             "stock": 12,
                             "image": "assets/img/store.webp",
-                            "offer": false
+                            "offer": false,
+                            "quantity": 1
                         },
                         {
                             "name": "Sueter para perros",
@@ -173,13 +196,34 @@
                             "price": 350,
                             "stock": 12,
                             "image": "assets/img/store.webp",
-                            "offer": false
+                            "offer": false,
+                            "quantity": 1
                         }    
                     ]);
-                
+                    const cart = ref([]);
+                    function addToCart(product){
+                        const productIndex =    cart.value.findIndex(prod => prod.name === product.name)
+                        if(productIndex >= 0 ) {
+                            cart.value[productIndex].quantity += 1;
+                        } else {
+                            cart.value.push(product);
+                        }
+                        product.stock -= 1;
+                    }
+                    const total = computed( () => {
+                        return  cart.value.reduce( (prev,curr) =>{
+                            const prevPrice = prev.price || prev;
+                            const prevQuatinty = prev.quantity || 1;
+                            return prevPrice * prevQuatinty + curr.price * curr.quantity;
+                        },0)
+                    });
+
                     return {
-                    storeName,
-                    products
+                        storeName,
+                        products,
+                        cart,
+                        addToCart,
+                        total
                     }
                 }
             });

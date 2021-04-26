@@ -1,19 +1,10 @@
 /**
-* color 1: #202426 #E0DFF2 #014040
-* color 2: #6C733D #C1C4D9 #02735E
-* color 3: #9DA65D #88ABF2 #03A678
-* color 4: #8C8C88 #080C0D #F28C0F
-* color 5: #F2F2F2 #1B2526 #591202
+* color 1: #014040
+* color 2: #02735E
+* color 3: #03A678
+* color 4: #F28C0F
+* color 5: #591202
 */
-
-body{
-    background-image: url("../img/header.png");
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-
-}
 
 header {
     background-color: #03A678;
@@ -23,22 +14,18 @@ header {
     background-attachment: fixed;
     background-repeat: no-repeat;
     height: 40rem;
-    color: #591202;
-   /* border-bottom: 1px solid #02735E; 
-
-*/
+  
 }
 
-
 .store-nav {
-    background-color: transparent;
+    background-color: #03A678;
     color: #014040;
 }
 .store-nav a {
     color: #014040;
 }
 .store-menu-icon{
-    color: #010040;
+    color: #014040;
 }
 
 .btn-store {
@@ -53,7 +40,7 @@ header {
 }
 
 footer{
-    background:transparent;
+    background: #03A678;
     
 }
 footer a {
@@ -64,21 +51,13 @@ footer a:hover{
     color: #F28C0F;
 }
 
-
+.bg-green{
+    background-color: #03A678;
+}
 
 @media (max-width:499px){
     header{
         background-image: url("../img/headerMobile.png");
         height: 45rem;
-    }
-    body{
-        background-image: url("../img/headerMobile.png");
-
-    }
-    .store-nav {
-        background-color: #03A678;
-    }
-    footer {
-        background: linear-gradient(transparent, #03A678);
     }
 }

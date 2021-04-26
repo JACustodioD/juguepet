@@ -8,7 +8,7 @@ app.component('product', {
                     <p class="card-text">{{product.description}}</p>
                     <p class="card-text">Precio: $ {{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-store me-md-2" type="button">Agregar <i class="fas fa-cart-plus"></i> </button>
+                        <button class="btn btn-store me-md-2" type="button" @click="sendToCart($event)">Agregar <i class="fas fa-cart-plus"></i> </button>
                     </div>
                 </div>
             </div>
@@ -16,10 +16,15 @@ app.component('product', {
 
     `,
     props:["product"],
+    emits:["sendToCart"],
 
-    setup(props){
+    setup(props, context){
+
+        function sendToCart(){
+            context.emit("sendtocart", props.product);
+        }
         return {
-
+            sendToCart
         }
     }
 });
