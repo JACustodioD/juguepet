@@ -8,7 +8,8 @@ app.component('product', {
                     <p class="card-text">{{product.description}}</p>
                     <p class="card-text">Precio: $ {{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-store me-md-2" type="button" @click="sendToCart($event)">Agregar <i class="fas fa-cart-plus"></i> </button>
+                        <button v-if="product.stock >= 1" class="btn btn-store me-md-2" type="button" @click="sendToCart($event)">Agregar <i class="fas fa-cart-plus"></i> </button>
+                        <span v-else class="text-warning">Sin productos en el stock</span>    
                     </div>
                 </div>
             </div>

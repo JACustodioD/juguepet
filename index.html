@@ -96,10 +96,10 @@
                 <div class="container">
                     <div class="row">
                       <div class="col-12 col-md-4 offset-md-8 my-4">
-                        <form class="d-flex">
-                          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                          <button class="btn btn-outline-success" type="submit">Buscar</button>
-                        </form>
+                        <div class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Buscar" @keyup.enter="searchProduct($event)" aria-label="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Presione enter para realizar la busqueda">
+                          <button class="btn btn-outline-success" type="button" @click="allProducts()" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostrar todos los productos"><i class="fas fa-redo-alt"></i></button>
+                        </div>
                       </div>
                     </div>
                 </div>
@@ -186,35 +186,19 @@
         <!-- alerts OhSnap -->
         <script src="assets/js/libs/ohsnap.js"></script>
 
+        <!-- creating products information -->
+        <script src="assets/js/api_products.js"></script>
+
         <!-- VueJS version 3 -->
         <script src="https://unpkg.com/vue@next"></script>
+
+        
         <script>
             const { createApp, ref, computed } = Vue;
             const app = createApp({
                 setup(){
                     const storeName = ref("JuguePet");
-                    const products = ref([
-                        {
-                            "name": "Pelota chica",
-                            "description": "Pelota de goma pequeña perfecta para que animales pequeños disfruten horas de diversión",
-                            "category": "dogs",
-                            "price": 35,
-                            "stock": 12,
-                            "image": "assets/img/store.webp",
-                            "offer": false,
-                            "quantity": 1
-                        },
-                        {
-                            "name": "Sueter para perros",
-                            "description": "Sueter de talla pequeña para perros para las temporadas de frios. adquierelo ya que se agotan pronto",
-                            "category": "dogs",
-                            "price": 350,
-                            "stock": 12,
-                            "image": "assets/img/store.webp",
-                            "offer": false,
-                            "quantity": 1
-                        }    
-                    ]);
+                    const products = ref( API_products );
                     const cart = ref([]);
                     function addToCart(product){
                         const productIndex =    cart.value.findIndex(prod => prod.name === product.name)
@@ -224,6 +208,10 @@
                             cart.value.push(product);
                         }
                         product.stock -= 1;
+
+                        /* descontamos del inventario en los productos del API */
+                        API_products = products.value;
+
                         ohSnap('Producto agregado', {color: 'green', duration:'1000', icon:'fas fa-check-circle'})
                     }
                     const total = computed( () => {
@@ -234,12 +222,35 @@
                         },0)
                     });
 
+                    function searchProduct(event){
+                      const productName = event.target.value;
+                      event.target.value = "";
+
+                      // buscamos el producto 
+                      const productFound =  API_products.find(prod => prod.name === productName);
+                      
+                      //verificamos si existe o no para mostrar información
+                      if(productFound) {
+                        products.value = [productFound];
+                      } else {
+                        products.value = productNotFound;
+                      }
+
+                      ohSnap('Busqueda realizada', {color: 'blue', duration:'1000', icon:'fas fa-check-circle'})
+                    }
+
+                    function allProducts(){ 
+                      products.value = API_products;
+                    }
+
                     return {
                         storeName,
                         products,
                         cart,
                         addToCart,
-                        total
+                        total,
+                        searchProduct,
+                        allProducts
                     }
                 }
             });
