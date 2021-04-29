@@ -1,263 +1,321 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- styles.css-->
-        <link rel="stylesheet" href="assets/css/styles.css">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-        <!-- icons fon awesome -->
-        <link rel="icon" type="image/png" href="assets/img/logo.png">
+	<!-- styles.css-->
+	<link rel="stylesheet" href="assets/css/styles.css">
 
-        <!-- alerts ohsnap -->
-        <link rel="stylesheet" href="assets/css/ohsnap.css">
+	<!-- icons fon awesome -->
+	<link rel="icon" type="image/png" href="assets/img/logo.png">
 
-        <!-- title -->
-        <title>JuguePet</title>
-    </head>
-    <body>
-        <div id="app">
+	<!-- alerts ohsnap -->
+	<link rel="stylesheet" href="assets/css/ohsnap.css">
 
-            <!-- header -->
-            <header></header>
-            <!-- end header -->
+	<!-- title -->
+	<title>JuguePet</title>
+</head>
 
-            <!-- nav -->
-            <nav class="navbar navbar-expand-lg store-nav sticky-top">
-                  <div class="container-fluid">
-                    <a class="navbar-brand" href="#"> <i class="fas fa-paw"></i> {{storeName}}</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                      <i class="fas fa-bars store-menu-icon"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <span class=" d-flex me-auto "></span>
-                          <ul class="navbar-nav  mb-2 mb-lg-0 ">
-                            <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="#offers">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="#search">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                  Carrito
-                                  <span class="badge bg-success">{{ cart.length}}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                  </div>
-            </nav>
-            <!-- end nav -->
+<body>
+	<div id="app">
 
-            <!-- offers -->
-            <section id="offers">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 my-4">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                  <div class="carousel-item active">
-                                    <img src="assets/img/banner-1.png" class="d-block w-100"  alt="imagen-1">
-                                  </div>
-                                  <div class="carousel-item">
-                                    <img src="assets/img/banner-2.png" class="d-block w-100" alt="imagen-2">
-                                  </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                  <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span class="visually-hidden">Next</span>
-                                </button>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- end offers -->
-            
-            <!-- search -->
-            <section id="search">
-                <div class="container">
-                    <div class="row">
-                      <div class="col-12 col-md-4 offset-md-8 my-4">
-                        <div class="d-flex">
-                          <input class="form-control me-2" type="search" placeholder="Buscar" @keyup.enter="searchProduct($event)" aria-label="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Presione enter para realizar la busqueda">
-                          <button class="btn btn-outline-success" type="button" @click="allProducts()" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostrar todos los productos"><i class="fas fa-redo-alt"></i></button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </section>          
-            <!-- end search -->
-            
-            <!-- products -->
-            <section id="products">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-md-3 g-4" >
-                        <product v-for="product in products" :key="product.name" :product="product" @sendtocart="addToCart($event)"></product>
-                    </div>
-                </div>
-            </section>
-            <!-- end products -->
+		<!-- header -->
+		<header></header>
+		<!-- end header -->
 
-            <!-- footer -->
-            <footer>
-              <div class="container-fluid mt-4">
-                <div class="row">
-                  <div class="col-12 my-4 text-center">
-                    <h6> &copy; Todos los derechos reservados</h6>
-                    <h6> <i class="fas fa-paw"></i> {{ storeName }} </h6>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12 text-center">
-                    <h6>Powered by <a href="#">JACustodioD</a></h6>
-                  </div>
-                </div>
-              </div>
-            </footer>
-            <!-- end footer -->
+		<!-- nav -->
+		<nav class="navbar navbar-expand-lg store-nav sticky-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"> <i class="fas fa-paw"></i> {{storeName}}</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+					aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fas fa-bars store-menu-icon"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<span class=" d-flex me-auto "></span>
+					<ul class="navbar-nav  mb-2 mb-lg-0 ">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="#offers">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#search">Productos</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Pricing</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+								Carrito
+								<span class="badge bg-success">{{ cart.length}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- end nav -->
 
-            <!-- cart -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <div class="row" v-for="product, index in cart" :key="product.name" :class="{'bg-green': index & 1}"> 
-                            <div class="col-4 my-2">
-                                <img :src="product.image" class="img-thumbnail" :alt="product.name">
-                            </div>
-                            <div class="col-7 my-2">
-                              <p>Nombre: {{product.name}}</p>
-                              <p>Cantidad: {{product.quantity}}</p>
-                              <p>Precio  ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
-                            </div>
-                      </div>
-                      <div class="row">
-                          <p class="text-end">Total $ {{total}} </p>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-outline-success">Comprar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end cart -->
+		<!-- offers -->
+		<section id="offers">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 my-4">
+						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+									class="active" aria-current="true" aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+									aria-label="Slide 2"></button>
+							</div>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="assets/img/banner-1.png" class="d-block w-100" alt="imagen-1">
+								</div>
+								<div class="carousel-item">
+									<img src="assets/img/banner-2.png" class="d-block w-100" alt="imagen-2">
+								</div>
+							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end offers -->
 
-            <!-- Message ohSnap  -->
-            <aside>
-              <div id="ohsnap"></div>
-            </aside>
-            <!-- end Message ohSnap  -->
-        </div>
-  
-        <!-- Bootstrap Version 5 -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-        
-        <!-- JQuery -->
-        <script src="assets/js/libs/jquery.js"></script>
-        
-        
-        <!-- Icons Font Awesome -->
-        <script src="assets/js/libs/icons.js"></script>
-        
-        <!-- alerts OhSnap -->
-        <script src="assets/js/libs/ohsnap.js"></script>
+		<!-- Pet's type -->
+		<section id="petstype">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-3 offset-md-2 my-2 text-center">
+						<figure class="figure">
+							<img class="img-typePet" src="assets/img/nala.jpg" alt="category_dogs" typePet="dogs"
+								@click="getPerPetType($event)">
+							<figcaption class="figure-caption">Articulos para perros.</figcaption>
+						</figure>
+					</div>
+					<div class="col-12 col-md-3 offset-md-2 my-2 text-center">
+						<figure class="figure">
+							<img class="img-typePet" src="assets/img/copito.jpg" alt="category_cats" typePet="cats"
+								@click="getPerPetType($event)">
+							<figcaption class="figure-caption">Articulos para Gatos</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end Pet's type -->
 
-        <!-- creating products information -->
-        <script src="assets/js/api_products.js"></script>
+		<!-- search -->
+		<section id="search">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-4 offset-md-8 my-4">
+						<div class="d-flex">
+							<input class="form-control me-2" type="search" placeholder="Buscar"
+								@keyup.enter="searchProduct($event)" aria-label="Search" data-bs-toggle="tooltip"
+								data-bs-placement="top" title="Presione enter para realizar la busqueda">
+							<button class="btn btn-outline-success" type="button" @click="allProducts()"
+								data-bs-toggle="tooltip" data-bs-placement="top" title="Mostrar todos los productos"><i
+									class="fas fa-redo-alt"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- end search -->
 
-        <!-- VueJS version 3 -->
-        <script src="https://unpkg.com/vue@next"></script>
+		<!-- products -->
+		<section id="products">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					<product v-for="product in products" :key="product.name" :product="product"
+						@sendtocart="addToCart($event)"></product>
+				</div>
+			</div>
+		</section>
+		<!-- end products -->
 
-        
-        <script>
-            const { createApp, ref, computed } = Vue;
-            const app = createApp({
-                setup(){
-                    const storeName = ref("JuguePet");
-                    const products = ref( API_products );
-                    const cart = ref([]);
-                    function addToCart(product){
-                        const productIndex =    cart.value.findIndex(prod => prod.name === product.name)
-                        if(productIndex >= 0 ) {
-                            cart.value[productIndex].quantity += 1;
-                        } else {
-                            cart.value.push(product);
-                        }
-                        product.stock -= 1;
+		<!-- footer -->
+		<footer>
+			<div class="container-fluid mt-4">
+				<div class="row">
+					<div class="col-12 my-4 text-center">
+						<h6> &copy; Todos los derechos reservados</h6>
+						<h6> <i class="fas fa-paw"></i> {{ storeName }} </h6>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 text-center">
+						<h6>Powered by <a href="#">JACustodioD</a></h6>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end footer -->
 
-                        /* descontamos del inventario en los productos del API */
-                        API_products = products.value;
+		<!-- cart -->
+		<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-center" id="cartModalLabel">Carrito</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row" v-for="product, index in cart" :key="product.name"
+							:class="{'bg-green': index & 1}">
+							<div class="col-4 my-2">
+								<img :src="product.image" class="img-thumbnail" :alt="product.name">
+							</div>
+							<div class="col-7 my-2">
+								<p>Nombre: {{product.name}}</p>
+								<p>Cantidad: {{product.quantity}}</p>
+								<p>Precio ${{ new Intl.NumberFormat("es-MX").format(product.price) }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<p class="text-end">Total $ {{ new Intl.NumberFormat("es-MX").format(total)}} </p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-light ">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end cart -->
 
-                        ohSnap('Producto agregado', {color: 'green', duration:'1000', icon:'fas fa-check-circle'})
-                    }
-                    const total = computed( () => {
-                        return  cart.value.reduce( (prev,curr) =>{
-                            const prevPrice = prev.price || prev;
-                            const prevQuatinty = prev.quantity || 1;
-                            return prevPrice * prevQuatinty + curr.price * curr.quantity;
-                        },0)
-                    });
+		<!-- Message ohSnap  -->
+		<aside>
+			<div id="ohsnap"></div>
+		</aside>
+		<!-- end Message ohSnap  -->
+	</div>
 
-                    function searchProduct(event){
-                      const productName = event.target.value;
-                      event.target.value = "";
+	<!-- Bootstrap Version 5 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
 
-                      // buscamos el producto 
-                      const productFound =  API_products.find(prod => prod.name === productName);
-                      
-                      //verificamos si existe o no para mostrar información
-                      if(productFound) {
-                        products.value = [productFound];
-                      } else {
-                        products.value = productNotFound;
-                      }
+	<!-- JQuery -->
+	<script src="assets/js/libs/jquery.js"></script>
 
-                      ohSnap('Busqueda realizada', {color: 'blue', duration:'1000', icon:'fas fa-check-circle'})
-                    }
+	<!-- Icons Font Awesome -->
+	<script src="assets/js/libs/icons.js"></script>
 
-                    function allProducts(){ 
-                      products.value = API_products;
-                    }
+	<!-- alerts OhSnap -->
+	<script src="assets/js/libs/ohsnap.js"></script>
 
-                    return {
-                        storeName,
-                        products,
-                        cart,
-                        addToCart,
-                        total,
-                        searchProduct,
-                        allProducts
-                    }
-                }
-            });
-        </script>
-        <script src="assets/js/product.js"></script>
-        <script>
-            app.mount("#app");
-        </script>
-    </body>
+	<!-- creating products information -->
+	<script src="assets/js/api_products.js"></script>
+
+	<!-- VueJS version 3 -->
+	<script src="https://unpkg.com/vue@next"></script>
+
+
+	<script>
+		const { createApp, ref, computed } = Vue;
+		const app = createApp({
+			setup() {
+				const storeName = ref("JuguePet");
+				const products = ref(API_products);
+				const cart = ref([]);
+				function addToCart(product) {
+					const productIndex = cart.value.findIndex(prod => prod.name === product.name)
+					if (productIndex >= 0) {
+						cart.value[productIndex].quantity += 1;
+					} else {
+						cart.value.push(product);
+					}
+					product.stock -= 1;
+
+					/* descontamos del inventario en los productos del API */
+					API_products = products.value;
+
+					ohSnap('Producto agregado', { color: 'green', duration: '1000', icon: 'fas fa-check-circle' })
+				}
+				const total = computed(() => {
+					return cart.value.reduce((prev, curr) => {
+						const prevPrice = prev.price || prev;
+						const prevQuatinty = prev.quantity || 1;
+						return prevPrice * prevQuatinty + curr.price * curr.quantity;
+					}, 0)
+				});
+
+				function searchProduct(element) {
+					const productName = element.target.value;
+					element.target.value = "";
+
+					// buscamos el producto 
+					const productFound = API_products.filter(prod => prod.name === productName);
+
+					console.log(productFound);
+					//verificamos si existe o no para mostrar información
+					if (productFound.length > 0) {
+						products.value = productFound;
+					} else {
+						products.value = productNotFound;
+					}
+
+					ohSnap('Busqueda realizada', { color: 'blue', duration: '1000', icon: 'fas fa-check-circle' })
+				}
+
+				function allProducts() {
+					products.value = API_products;
+
+					ohSnap('Mostrando todos los productos', { color: 'blue', duration: '1000', icon: 'fas fa-check-circle' })
+
+				}
+
+				function getPerPetType(element) {
+					const typePet = element.target.attributes.typePet.value;
+
+					const productsList = API_products.filter(prod => prod.type === typePet);
+
+					if (productsList.length > 0) {
+						products.value = productsList;
+					} else {
+						products.value = productNotFound;
+					}
+
+					ohSnap('Busqueda realizada', { color: 'blue', duration: '1000', icon: 'fas fa-check-circle' })
+
+				}
+
+				return {
+					storeName,
+					products,
+					cart,
+					addToCart,
+					total,
+					searchProduct,
+					allProducts,
+					getPerPetType
+				}
+			}
+		});
+	</script>
+	<script src="assets/js/product.js"></script>
+	<script>
+		app.mount("#app");
+	</script>
+</body>
+
 </html>
