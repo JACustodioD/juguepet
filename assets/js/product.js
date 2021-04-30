@@ -18,12 +18,12 @@ app.component('product', {
          </div>
 
     `,
-    props:["product"],
-    emits:["sendToCart"],
+    props: ["product"],
+    emits: ["sendToCart"],
 
-    setup(props, context){
+    setup(props, context) {
 
-        function sendToCart(){
+        function sendToCart() {
             context.emit("sendtocart", props.product);
         }
         return {
