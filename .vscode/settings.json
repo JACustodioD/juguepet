@@ -1,4 +1,12 @@
 {
     "editor.fontSize": 16,
-    "editor.fontFamily": "'Anonymous Pro Bold Italic'"
+    "editor.fontFamily": "'Anonymous Pro Bold Italic'", 
+    "liveSassCompile.settings.formats":[
+        // This is Default.
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/assets/css/"
+        } 
+    ]
 }

@@ -1,0 +1,88 @@
+.btn-store {
+    color: white;
+    background-color: $color3;
+    border-color: $color2;
+}
+
+.bg-green {
+    background-color: $color3
+}
+
+body {
+    @include backgroundImage($bodyBackground);
+}
+
+header {
+    @include backgroundImage($headerBackground);
+    height: 40rem;
+    @include responsive($responsiveMax-width) {
+        background-image: url("#{$headerBackgroundMobile}");
+        height: 45rem;
+    }
+}
+
+.store-nav {
+    background-color: $color3;
+    color: $color1;
+    & a {
+        color: $color1;
+    }
+}
+
+.store-menu-icon {
+    color: $color1;
+}
+
+.img-typePet {
+    height: 150px;
+    width: 200px;
+    @include border(4px,
+    $color4,
+    5px);
+    &:hover {
+        cursor: pointer;
+        border: 5px solid $color3;
+    }
+}
+
+.figure-caption {
+    color: $color1;
+}
+
+.card {
+    @include border(3px,
+    $color1,
+    3%);
+    & img {
+        height: 300px;
+    }
+}
+
+.card-body {
+    height: 200px;
+}
+
+.card-footer {
+    height: 70px;
+    background-color: white;
+    border: 0;
+}
+
+footer {
+    background: $color3;
+    & a {
+        text-decoration: none;
+        color: $color1;
+        &:hover {
+            color: $color4;
+        }
+    }
+}
+
+#cartModal {
+    color: $color1;
+    & .modal-header,
+    & .modal-footer {
+        background-color: $color3;
+    }
+}
